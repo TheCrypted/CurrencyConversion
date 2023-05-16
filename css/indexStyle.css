@@ -1,0 +1,66 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#FromIMG {
+    height: 100vh;
+    background-image: url("https://flagcdn.com/w2560/ae.png");
+    background-size: 150% 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+#ToIMG {
+    background-image: url("https://flagcdn.com/w2560/in.png");
+    background-size: 150% 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+select::-webkit-scrollbar{
+    width:0;
+}
+
+select{
+    font-size: 2vh;
+    /*box-sizing: border-box;*/
+    padding: 2vh;
+    width: 10%;
+    border: none;
+}
+option {
+    color: black;
+    background-color: white;
+}
+
+#FromInputA{
+    background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
+    position: relative;
+    top: 45%;
+    left: 60.1%;
+    height: 10vh;
+    width: 20vw;
+    z-index: 30;
+    box-shadow: -5px 5px 300px rgba(0, 0 , 0, 1);
+}
+
+#ToInputA{
+    color: #d7d2cc;
+    background-image: linear-gradient(to left, #d7d2cc 0%, #304352 100%);
+    position: relative;
+    top: 45%;
+    left: 0%;
+    display: grid;
+    height: 10vh;
+    width: 20vw;
+    z-index: 10;
+    box-shadow: 5px 5px 300px rgba(0, 0 , 0, 1);
+}
