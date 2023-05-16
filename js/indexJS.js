@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let toInput = document.getElementById("ToInputA");
     let fromIMG = document.getElementById("FromIMG")
     let toIMG = document.getElementById("ToIMG")
+    let fromDown = false;
+    let toDown = false;
     let url = 'https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have=USD&want=EUR&amount=5000';
     const options = {
         method: 'GET',
@@ -36,7 +38,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         optionTo.style.fontSize = "7vh";
         optionTo.style.opacity = "0.5";
     }
-    
     fetch('https://openexchangerates.org/api/currencies.json')
         .then(response => response.json())
         .then(currencies => {
@@ -49,10 +50,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 currencySelectorFrom.appendChild(option);
                 option.addEventListener("mousedown", ()=>{
                     let countryCode = option.getAttribute("data-value").toLowerCase().slice(0, 2);
+                    if(!fromDown) {
+                        currencySelectorFrom.style.zIndex = "0";
+                        fromDown = true;
+                    } else {
+                        currencySelectorFrom.style.zIndex = "300";
+                        fromDown = false;
+                    }
                     fromInput.placeholder = option.getAttribute("data-value");
                     fromIMG.style.backgroundImage = "url(https://flagcdn.com/w2560/" + countryCode +".png)"
                     pullData(fromInput, toInput).then(r => {})
                 })
+                // option.addEventListener("scroll", ()=>{
+                //     console.log("check")
+                //     if(option.offsetTop - currencySelectorFrom.scrollTop < 800){
+                //         console.log(option.offsetTop)
+                //         change(option)
+                //     }else{
+                //         revert(option)
+                //     }
+                // })
                 option.addEventListener("mousemove", ()=>{
                     change(option)
                 })
@@ -68,6 +85,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 currencySelectorTo.appendChild(optionTo);
                 optionTo.addEventListener("mousedown", ()=>{
                     let countryCode = optionTo.getAttribute("data-value").toLowerCase().slice(0, 2);
+                    if(!toDown) {
+                        currencySelectorTo.style.zIndex = "0";
+                        toDown = true;
+                    } else {
+                        currencySelectorTo.style.zIndex = "300";
+                        toDown = false;
+                    }
                     toInput.placeholder = optionTo.getAttribute("data-value");
                     toIMG.style.backgroundImage = "url(https://flagcdn.com/w2560/" + countryCode +".png)"
                     pullData(toInput, fromInput).then(r => {})
@@ -88,9 +112,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     toInput.addEventListener("input", async () => {
         await pullData(toInput, fromInput)
     })
-    // currencySelectorFrom.addEventListener("change", () => {
-    //     let countryCode = currencySelectorFrom.value.toLowerCase().slice(0, 2);
-    //     fromIMG.style.backgroundImage = "url(https://flagcdn.com/w2560/" + countryCode +".png)"
-    //     console.log("async")
+    // currencySelectorFrom.addEventListener("scroll", () =>{
+    //     // console.log(option.scrollTop)
+    //     console.log("div: " + currencySelectorFrom.scrollTop)
     // })
 })
