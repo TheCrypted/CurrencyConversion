@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '3fdab1549dmsh23dd5f556a66dd4p10a8e7jsn57e7822f9753',
+            'X-RapidAPI-Key': '',
             'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
         }
     };
