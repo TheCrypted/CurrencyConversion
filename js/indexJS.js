@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
         }
     };
-    async function pullData(){
+    async function pullData(fromInput, toInput){
         if(fromInput.value !== "") {
             try {
                 url = `https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have=${fromInput.placeholder}&want=${toInput.placeholder}&amount=${fromInput.value}`
@@ -28,6 +28,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
             toInput.value = ""
         }
     }
+    function change(option){
+        option.style.fontSize = "10vh";
+        option.style.opacity = "1";
+    }
+    function revert(optionTo){
+        optionTo.style.fontSize = "7vh";
+        optionTo.style.opacity = "0.5";
+    }
+    
     fetch('https://openexchangerates.org/api/currencies.json')
         .then(response => response.json())
         .then(currencies => {
@@ -42,15 +51,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     let countryCode = option.getAttribute("data-value").toLowerCase().slice(0, 2);
                     fromInput.placeholder = option.getAttribute("data-value");
                     fromIMG.style.backgroundImage = "url(https://flagcdn.com/w2560/" + countryCode +".png)"
-                    pullData().then(r => {})
+                    pullData(fromInput, toInput).then(r => {})
                 })
                 option.addEventListener("mousemove", ()=>{
-                    option.style.fontSize = "10vh";
-                    option.style.opacity = "1";
+                    change(option)
                 })
                 option.addEventListener("mouseout", ()=>{
-                    option.style.fontSize = "7vh";
-                    option.style.opacity = "0.5";
+                    revert(option)
                 })
 
                 const optionTo = document.createElement('div');
@@ -63,22 +70,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     let countryCode = optionTo.getAttribute("data-value").toLowerCase().slice(0, 2);
                     toInput.placeholder = optionTo.getAttribute("data-value");
                     toIMG.style.backgroundImage = "url(https://flagcdn.com/w2560/" + countryCode +".png)"
-                    pullData().then(r => {})
+                    pullData(toInput, fromInput).then(r => {})
                 })
                 optionTo.addEventListener("mousemove", ()=>{
-                    optionTo.style.fontSize = "10vh";
-                    optionTo.style.opacity = "1";
+                    change(optionTo)
                 })
                 optionTo.addEventListener("mouseout", ()=>{
-                    optionTo.style.fontSize = "7vh";
-                    optionTo.style.opacity = "0.5";
+                    revert(optionTo)
                 })
             }
         }).catch(error => {
             console.error(error)
     })
     fromInput.addEventListener("input", async () => {
-        await pullData()
+        await pullData(fromInput, toInput)
+    })
+    toInput.addEventListener("input", async () => {
+        await pullData(toInput, fromInput)
     })
     // currencySelectorFrom.addEventListener("change", () => {
     //     let countryCode = currencySelectorFrom.value.toLowerCase().slice(0, 2);
