@@ -2,6 +2,8 @@ html, body{
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 form {
@@ -19,7 +21,7 @@ form {
 }
 
 #ToIMG {
-    background-image: url("https://flagcdn.com/w2560/in.png");
+    background-image: url("https://flagcdn.com/w2560/za.png");
     background-size: 150% 100%;
     background-position: top;
     background-repeat: no-repeat;
@@ -29,35 +31,89 @@ select::-webkit-scrollbar{
     width:0;
 }
 
-select{
-    font-size: 2vh;
+input{
+    font-size: 7vh;
     /*box-sizing: border-box;*/
     padding: 2vh;
     width: 10%;
     border: none;
+    transition: font-size 0.5s ease;
 }
-option {
+input::placeholder{
     color: black;
-    background-color: white;
+    opacity: 0.5;
 }
+input:focus{
+    outline: none;
+    font-size: 9vh;
+}
+
+.darkenIMG::-webkit-scrollbar{
+    width: 0;
+}
+
+.darkenIMG{
+    background-color: black;
+    opacity: 0.4;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 0;
+    overflow-x: hidden;
+}
+
+.OptionsFrom{
+    color: wheat;
+    text-shadow: 1px 1px 50px rgba(0,0,0,1);
+    font-size: 7vh;
+    position: relative;
+    right: 5%;
+    text-align: right;
+    width: 100%;
+    height: 10%;
+    padding: 2%;
+    transition: font-size 1s ease;
+}
+
+.OptionsTo{
+    color: wheat;
+    text-shadow: 1px 1px 50px rgba(0,0,0,1);
+    font-size: 7vh;
+    position: relative;
+    left: 1%;
+    text-align: left;
+    width: 100%;
+    height: 10%;
+    padding: 2%;
+    transition: font-size 1s ease;
+}
+
 
 #FromInputA{
     background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
     position: relative;
+    border-top-left-radius: 4vh;
+    border-bottom-left-radius: 4vh;
     top: 45%;
-    left: 60.1%;
+    text-align: center;
+    left: 56.1%;
     height: 10vh;
     width: 20vw;
     z-index: 30;
-    box-shadow: -5px 5px 300px rgba(0, 0 , 0, 1);
+    box-shadow: -5px 5px 600px rgba(0, 0 , 0, 1);
 }
 
 #ToInputA{
     color: #d7d2cc;
+    border-top-right-radius: 4vh;
+    border-bottom-right-radius: 4vh;
     background-image: linear-gradient(to left, #d7d2cc 0%, #304352 100%);
     position: relative;
     top: 45%;
     left: 0%;
+    text-align: center;
     display: grid;
     height: 10vh;
     width: 20vw;
